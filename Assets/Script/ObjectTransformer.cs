@@ -7,7 +7,7 @@ public class ObjectTransformer : MonoBehaviour
     // Start is called before the first frame update
     public float movementSpeed = 50;
     public float RotationSpeed = 50;
-    public float scaleSpeed = 10;
+    public float scaleSpeed = 100;
     void Start()
     {
         

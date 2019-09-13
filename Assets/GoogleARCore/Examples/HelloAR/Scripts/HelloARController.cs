@@ -132,7 +132,7 @@ namespace GoogleARCore.Examples.HelloAR
                             Destroy(andyObject);
                             // Instantiate Andy model at the hit pose.
                             andyObject = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
-                            
+                        andyObject.AddComponent<ObjectTransformer>();
                             // Compensate for the hitPose rotation facing away from the raycast (i.e.
                             // camera).
                             andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);

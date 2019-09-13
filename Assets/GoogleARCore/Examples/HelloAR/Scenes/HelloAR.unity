@@ -414,9 +414,12 @@ MonoBehaviour:
   AndyVerticalPlanePrefab: {fileID: 1139652755034496, guid: 3dba1642550ba4d159c183ce979f5647,
     type: 3}
   AndyHorizontalPlanePrefab:
-  - {fileID: 1190091649889860, guid: 63e9325810cb14b9e8e0590d57d87afb, type: 3}
-  - {fileID: 1139652755034496, guid: 3dba1642550ba4d159c183ce979f5647, type: 3}
-  - {fileID: 1190091649889860, guid: b27e8d7fe70df464188ea5dcf2af0bb3, type: 3}
+  - {fileID: 140824, guid: 7acd807f6e407054eabe771d7b19dafd, type: 3}
+  - {fileID: 127564, guid: d6564a5e1c5e6474f9d7ed2851d18ea7, type: 3}
+  - {fileID: 165544, guid: 5738e7a0e0085e1499609a7ad3eedad4, type: 3}
+  - {fileID: 144692, guid: 3f8ad08630124d849bd213ec91fe8427, type: 3}
+  - {fileID: 181942, guid: 662c0b6b9e9922c45b57c16a9981f996, type: 3}
+  - {fileID: 151928, guid: 4173226ece88fe042bcb1a5de30a2d6b, type: 3}
   AndyPointPrefab: {fileID: 1190091649889860, guid: b27e8d7fe70df464188ea5dcf2af0bb3,
     type: 3}
 --- !u!1001 &688001843
