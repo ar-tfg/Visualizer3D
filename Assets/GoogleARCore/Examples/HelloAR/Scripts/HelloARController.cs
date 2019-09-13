@@ -55,7 +55,7 @@ namespace GoogleARCore.Examples.HelloAR
         /// <summary>
         /// A model to place when a raycast from a user touch hits a horizontal plane.
         /// </summary>
-        public GameObject AndyHorizontalPlanePrefab;
+        public GameObject[] AndyHorizontalPlanePrefab;
 
         /// <summary>
         /// A model to place when a raycast from a user touch hits a feature point.
@@ -83,10 +83,9 @@ namespace GoogleARCore.Examples.HelloAR
             Application.targetFrameRate = 60;
         }
 
-        /// <summary>
-        /// The Unity Update() method.
-        /// </summary>
-        private bool created = false;
+        GameObject andyObject;
+
+        int cont = 0;
         /// <summary>
         /// The Unity Update() method.
         /// </summary>
@@ -94,17 +93,18 @@ namespace GoogleARCore.Examples.HelloAR
         {
             _UpdateApplicationLifecycle();
 
-            if (!created)
-            {
 
-                // Raycast against the location the player touched to search for planes.
-                TrackableHit hit;
+            if (UnityEngine.Input.GetButtonDown("Fire3"))
+            {
+                cont = (cont + 1) % AndyHorizontalPlanePrefab.Length;
+            }
+            // Raycast against the location the player touched to search for planes.
+            TrackableHit hit;
                 TrackableHitFlags raycastFilter = TrackableHitFlags.PlaneWithinPolygon |
                     TrackableHitFlags.FeaturePointWithSurfaceNormal;
-
-                if (UnityEngine.Input.GetButtonDown("Fire3"))
+                
+                if (UnityEngine.Input.GetButtonDown("Fire1"))
                 {
-                    created = true;
                     Debug.Log("DOSOMETHINGAR");
                     Frame.Raycast(Screen.width / 2, Screen.height / 2, raycastFilter, out hit);
                     {
@@ -126,12 +126,13 @@ namespace GoogleARCore.Examples.HelloAR
                             }
                             else
                             {
-                                prefab = AndyHorizontalPlanePrefab;
+                                prefab = AndyHorizontalPlanePrefab[cont];
                             }
-
+                        if (andyObject != null)
+                            Destroy(andyObject);
                             // Instantiate Andy model at the hit pose.
-                            var andyObject = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
-
+                            andyObject = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
+                            
                             // Compensate for the hitPose rotation facing away from the raycast (i.e.
                             // camera).
                             andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
@@ -146,7 +147,7 @@ namespace GoogleARCore.Examples.HelloAR
                     }
                 }
             }
-        }
+        
 
         /// <summary>
         /// Check and update the application lifecycle.
