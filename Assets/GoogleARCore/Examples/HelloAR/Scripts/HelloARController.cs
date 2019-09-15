@@ -105,7 +105,6 @@ namespace GoogleARCore.Examples.HelloAR
                 
                 if (UnityEngine.Input.GetButtonDown("Fire1"))
                 {
-                    Debug.Log("DOSOMETHINGAR");
                     Frame.Raycast(Screen.width / 2, Screen.height / 2, raycastFilter, out hit);
                     {
                         // Use hit pose and camera pose to check if hittest is from the
@@ -122,7 +121,8 @@ namespace GoogleARCore.Examples.HelloAR
                             GameObject prefab;
                             if (hit.Trackable is FeaturePoint)
                             {
-                                prefab = AndyPointPrefab;
+                            //prefab = AndyPointPrefab;
+                            prefab = null;
                             }
                             else
                             {
@@ -131,18 +131,20 @@ namespace GoogleARCore.Examples.HelloAR
                         if (andyObject != null)
                             Destroy(andyObject);
                             // Instantiate Andy model at the hit pose.
-                            andyObject = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
-                        andyObject.AddComponent<ObjectTransformer>();
-                            // Compensate for the hitPose rotation facing away from the raycast (i.e.
-                            // camera).
-                            andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
+                            if (prefab != null) { 
+                                andyObject = Instantiate(prefab, hit.Pose.position, hit.Pose.rotation);
+                            andyObject.AddComponent<ObjectTransformer>();
+                                // Compensate for the hitPose rotation facing away from the raycast (i.e.
+                                // camera).
+                                andyObject.transform.Rotate(0, k_ModelRotation, 0, Space.Self);
 
-                            // Create an anchor to allow ARCore to track the hitpoint as understanding of
-                            // the physical world evolves.
-                            var anchor = hit.Trackable.CreateAnchor(hit.Pose);
+                                // Create an anchor to allow ARCore to track the hitpoint as understanding of
+                                // the physical world evolves.
+                                var anchor = hit.Trackable.CreateAnchor(hit.Pose);
 
-                            // Make Andy model a child of the anchor.
-                            andyObject.transform.parent = anchor.transform;
+                                // Make Andy model a child of the anchor.
+                                andyObject.transform.parent = anchor.transform;
+                             }
                         }
                     }
                 }
